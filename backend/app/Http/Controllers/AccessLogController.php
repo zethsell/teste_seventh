@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\AccessLog;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class AccessLogController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function __invoke(Request $request)
+
+    public function __invoke(): JsonResponse
     {
-        //
+        try {
+            $logs = [];
+
+            if (Gate::allows('view_any_log')) {
+                $logs = AccessLog::with('user')->get();
+            }
+
+            return response()->json(compact('logs'), Response::HTTP_OK);
+        } catch (Throwable $e) {
+            return response()->json($e, Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

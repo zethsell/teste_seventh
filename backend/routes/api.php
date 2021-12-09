@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -11,4 +12,7 @@ Route::group(['middleware' => ['api', 'auth:sanctum']], function () {
 
     #User Routes
     Route::resource('users', UserController::class);
+
+    #Log Route
+    Route::any('access_logs', AccessLogController::class)->name('access_logs');
 });
