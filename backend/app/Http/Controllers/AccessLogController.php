@@ -17,7 +17,7 @@ class AccessLogController extends Controller
             $logs = [];
 
             if (Gate::allows('view_any_log')) {
-                $logs = AccessLog::with('user')->get();
+                $logs = AccessLog::with('user')->orderBy('id')->get();
             }
 
             return response()->json(compact('logs'), Response::HTTP_OK);

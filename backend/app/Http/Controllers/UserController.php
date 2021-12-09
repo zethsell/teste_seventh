@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         try {
             if (Auth::user()->cannot('view_any_user', $loggedUser)) {
-                $users = User::whereId(Auth::user()->id)->with('level')->get();
+                $users = User::whereId(Auth::user()->id)->with('level')->orderBy('name','asc')->get();
             } else {
                 $users = User::with('level')->get();
             }

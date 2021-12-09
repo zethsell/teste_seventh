@@ -6,14 +6,14 @@
         <div class="px-6 mt-6">
           <input class="outline-none border w-full p-2 rounded-sm my-2" placeholder="Email" type="email"
                  v-model="form.email">
-          <span v-if="errors.email" class="text-md text-red-600 w-full flex justify-start">* {{
-              errors.email[0]
-            }}</span>
+          <span v-if="errors.email" class="text-md text-red-600 w-full flex justify-start">
+            * {{ errors.email[0] }}
+          </span>
           <input class="outline-none border w-full p-2 rounded-sm my-2" placeholder="Senha" type="password"
                  v-model="form.password">
-          <span v-if="errors.password" class="text-md text-red-600 w-full flex justify-start">* {{
-              errors.password[0]
-            }}</span>
+          <span v-if="errors.password" class="text-md text-red-600 w-full flex justify-start">
+            * {{ errors.password[0] }}
+          </span>
         </div>
         <div class="flex p-6">
           <button class="border bg-dark-blue w-full text-gray-50 hover:bg-blue-900 p-2 rounded-sm my-2 mr-2"
@@ -40,7 +40,7 @@ export default defineComponent({
     LoginTemplate
   },
   created() {
-    if (localStorage.getItem('user')){
+    if (localStorage.getItem('user')) {
       this.$router.push('/');
     }
   },
@@ -64,7 +64,13 @@ export default defineComponent({
             }
           })
           .catch((errors) => {
-            this.errors = errors.response.data.errors
+            if (errors.response.status === 422) {
+              this.errors = errors.response.data.errors
+            } else {
+              alert(errors.response.data.errors)
+            }
+
+
           })
     }
   }

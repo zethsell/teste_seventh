@@ -3,7 +3,7 @@ import Login from '../views/Public/Login.vue'
 import Registration from '../views/Public/Registration.vue'
 import Home from '../views/Private/Home.vue'
 import AccessLog from '../views/Private/AccessLog.vue'
-import Userindex from '../views/Private/Users/Index.vue'
+import UserIndex from '../views/Private/Users/Index.vue'
 import UserCreate from '../views/Private/Users/Create.vue'
 import UserEdit from '../views/Private/Users/Edit.vue'
 
@@ -36,8 +36,8 @@ const routes = [
     },
     {
         path: '/users',
-        name: 'Userindex',
-        component: Userindex
+        name: 'UserIndex',
+        component: UserIndex
     },
     {
         path: '/user/new',
@@ -45,7 +45,7 @@ const routes = [
         component: UserCreate
     },
     {
-        path: '/user/edit',
+        path: '/user/:id/edit',
         name: 'UserEdit',
         component: UserEdit
     },
