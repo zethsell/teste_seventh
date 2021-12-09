@@ -9,6 +9,8 @@ import {
     faBook as fasBook,
     faDoorClosed as fasDoorClosed,
     faDoorOpen as fasDoorOpen,
+    faPencilAlt as faPencilAlt,
+    faTrash as fasTrash,
 } from '@fortawesome/free-solid-svg-icons'
 
 /**
@@ -25,7 +27,9 @@ library.add(
     fasBook,
     fasDoorOpen,
     fasDoorClosed,
-    farUser
+    farUser,
+    faPencilAlt,
+    fasTrash
 )
 ;
 

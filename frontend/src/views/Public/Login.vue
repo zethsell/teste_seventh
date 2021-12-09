@@ -64,13 +64,20 @@ export default defineComponent({
             }
           })
           .catch((errors) => {
-            if (errors.response.status === 422) {
-              this.errors = errors.response.data.errors
-            } else {
-              alert(errors.response.data.errors)
+            switch (errors.response.status) {
+              case 422: {
+                this.errors = errors.response.data.errors
+                break;
+              }
+              case 401: {
+                alert('Verifique os dados digitados!');
+                break;
+              }
+              default: {
+                alert(errors.response.data.errors)
+                break;
+              }
             }
-
-
           })
     }
   }

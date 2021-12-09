@@ -58,13 +58,21 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const publicPages = ['/login', '/registration'];
-    const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem('user');
+    const admPages = ['/access_logs'];
 
+    const authRequired = !publicPages.includes(to.path);
+    const admRequired = admPages.includes(to.path);
+    const loggedIn = JSON.parse(localStorage.getItem('user'));
+
+    console.log(loggedIn)
     if (authRequired && !loggedIn) {
         next({name: 'Login'});
     } else {
-        next();
+        if (admRequired && !loggedIn.admin) {
+            next({name: 'Home'});
+        } else {
+            next();
+        }
     }
 });
 
