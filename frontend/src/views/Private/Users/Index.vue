@@ -5,7 +5,6 @@
         <!-- Header -->
         <div class="flex flex-row justify-between my-2 px-10">
           <h2 class="text-2xl">Usuários</h2>
-          <button @click="createUser">Novo</button>
         </div>
 
         <!-- List -->
@@ -29,7 +28,7 @@
                 <span>{{ user.level.description }}</span>
               </div>
               <div class="flex flex-row sm:w-1/3 w-full h-full sm:items-center justify-end items-end">
-                <icon-button class="text-blue-400 w-10 h-10" @click="editUser(user)">
+                <icon-button class="text-blue-400 w-10 h-10" @click="editUser(user.id)">
                   <fa :icon="['fas', 'pencil-alt']"/>
                 </icon-button>
                 <icon-button
@@ -70,8 +69,16 @@ export default defineComponent({
     loadUsers: async function () {
       const response = await AxiosService.getContent("users");
       this.users = response.data.users;
-      console.log(this.users)
     },
+    editUser: function (id) {
+      this.$router.push({name: 'UserEdit', params: {id: id}})
+    },
+    deleteUser: async function (id) {
+      const response = await AxiosService.deleteContent("users", id);
+      if (response.status === 200) {
+        alert('Usuário removido com sucesso!')
+      }
+    }
   }
 });
 </script>
