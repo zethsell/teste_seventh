@@ -12,6 +12,7 @@
                       v-model="user.password" :errors="errors.name ? errors.password[0] : null"/>
           <auth-input placeholder="Confirme a Senha" type="password"
                       v-model="user.password_confirmation"/>
+          <span v-if="!passwordConfirmation" class="text-md text-red-500 flex justify-start">* As senhas digitadas são diferentes!</span>
         </div>
         <div class="flex p-6">
           <button class="border bg-dark-blue w-full text-gray-50 hover:bg-blue-900 p-2 rounded-sm my-2 mr-2">

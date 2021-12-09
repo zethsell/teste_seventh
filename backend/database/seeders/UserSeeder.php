@@ -17,5 +17,12 @@ class UserSeeder extends Seeder
             'email' => 'admin@seventh.com',
             'password' => Hash::make('123adm456'),
             'level_id' => $level->id]);
+
+        $level = Level::where('description', 'Client')->first();
+        User::create([
+            'name' => 'Client',
+            'email' => 'client@seventh.com',
+            'password' => Hash::make('123cli456'),
+            'level_id' => $level->id]);
     }
 }

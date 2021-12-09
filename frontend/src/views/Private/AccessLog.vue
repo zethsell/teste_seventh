@@ -37,7 +37,7 @@
 <script>
 import {defineComponent} from "vue";
 import MainTemplate from '@/templates/MainTemplate'
-import AxiosService from "@/services/axios-service";
+import authHeader from '@/services/auth-header';
 
 export default defineComponent({
   components: {
@@ -54,8 +54,16 @@ export default defineComponent({
 
   methods: {
     loadLog: async function () {
-      const response = await AxiosService.getContent("access_logs");
-      this.logs = response.data.logs;
+
+      await this.axios.get(process.env.VUE_APP_ROOT_API + 'access_logs', {headers: authHeader()})
+          .then((response) => {
+            if (response.status === 200) {
+              this.logs = response.data.logs;
+            }
+          })
+          .catch((errors) => {
+            alert(errors);
+          })
     },
   }
 });

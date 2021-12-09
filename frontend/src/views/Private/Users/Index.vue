@@ -5,6 +5,9 @@
         <!-- Header -->
         <div class="flex flex-row justify-between my-2 px-10">
           <h2 class="text-2xl">Usuários</h2>
+          <router-link v-if="user.admin" :to="{name:'UserCreate'}"
+                       class="p-2 w-20 bg-dark-blue text-gray-50 rounded-md">Novo
+          </router-link>
         </div>
 
         <!-- List -->
@@ -32,6 +35,7 @@
                   <fa :icon="['fas', 'pencil-alt']"/>
                 </icon-button>
                 <icon-button
+                    v-if="this.user.admin"
                     class="text-red-700 w-10 h-10"
                     @click="deleteUser(user.id)"
                 >
@@ -48,8 +52,8 @@
 <script>
 import {defineComponent} from "vue";
 import MainTemplate from '@/templates/MainTemplate'
-import AxiosService from "@/services/axios-service";
-import IconButton from "../../../components/IconButton";
+import authHeader from '@/services/auth-header';
+import IconButton from "@/components/IconButton";
 
 export default defineComponent({
   components: {
@@ -64,21 +68,44 @@ export default defineComponent({
   created() {
     this.loadUsers();
   },
-
+  computed: {
+    user() {
+      return JSON.parse(localStorage.getItem('user'))
+    }
+  },
   methods: {
     loadUsers: async function () {
-      const response = await AxiosService.getContent("users");
-      this.users = response.data.users;
+      await this.axios.get(process.env.VUE_APP_ROOT_API + 'users', {headers: authHeader()})
+          .then((response) => {
+            if (response.status === 200) {
+              this.users = response.data.users
+            }
+          })
+          .catch((errors) => {
+            alert(errors);
+          })
     },
     editUser: function (id) {
       this.$router.push({name: 'UserEdit', params: {id: id}})
     },
     deleteUser: async function (id) {
-      const response = await AxiosService.deleteContent("users", id);
-      if (response.status === 200) {
-        alert('Usuário removido com sucesso!')
-      }
+      await this.axios.delete(process.env.VUE_APP_ROOT_API + 'users/' + id, {headers: authHeader()})
+          .then((response) => {
+            if (response.status === 200) {
+              alert('Usuário removido com sucesso!')
+              this.loadUsers()
+              if (id === this.user.id) {
+                localStorage.clear()
+                this.$router.push({name: 'Login'})
+              }
+            }
+          })
+          .catch((errors) => {
+            alert(errors);
+          })
     }
   }
-});
+
+})
+;
 </script>

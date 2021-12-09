@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccessLogController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,7 @@ Route::group(['middleware' => ['api', 'auth:sanctum']], function () {
 
     #Log Route
     Route::any('access_logs', AccessLogController::class)->name('access_logs');
+
+    #Log Level
+    Route::any('levels', LevelController::class)->name('levels');
 });

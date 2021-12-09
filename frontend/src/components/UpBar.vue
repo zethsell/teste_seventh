@@ -3,6 +3,10 @@
     <div class="h-full w-full  flex justify-between items-center">
       <div class="flex">
         <li class="h-12 flex flex-row p-4 items-center justify-start hover:text-gray-500  cursor-pointer">
+          <fa :icon="['fas','home']" class="mr-2"/>
+          <router-link :to="{name:'Home'}">Home</router-link>
+        </li>
+        <li class="h-12 flex flex-row p-4 items-center justify-start hover:text-gray-500  cursor-pointer">
           <fa :icon="['far','user']" class="mr-2"/>
           <router-link :to="{name:'UserIndex'}">Usuários</router-link>
         </li>

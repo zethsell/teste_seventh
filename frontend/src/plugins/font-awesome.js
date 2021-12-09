@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
  * solid icons
  */
 import {
-    faUser as fasUser,
+    faHome as fasHome,
     faBook as fasBook,
     faDoorClosed as fasDoorClosed,
     faDoorOpen as fasDoorOpen,
@@ -23,7 +23,7 @@ import {
 
 
 library.add(
-    fasUser,
+    fasHome,
     fasBook,
     fasDoorOpen,
     fasDoorClosed,

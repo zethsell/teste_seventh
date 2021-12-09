@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         try {
             if (Auth::user()->cannot('view_any_user', $loggedUser)) {
-                $users = User::whereId(Auth::user()->id)->with('level')->orderBy('name','asc')->get();
+                $users = User::whereId(Auth::user()->id)->with('level')->orderBy('name', 'asc')->get();
             } else {
                 $users = User::with('level')->get();
             }
@@ -68,14 +68,16 @@ class UserController extends Controller
     {
         try {
             $user = User::whereId($id)->with('level')->first();
-
             if (Auth::user()->cannot('update_user', $user, $loggedUser)) {
                 return response()->json(['errors' => ['Acesso não autorizado!']], Response::HTTP_FORBIDDEN);
             }
 
             $user->name = $request['name'];
             $user->email = strtolower($request['email']);
-            $user->password = Hash::make($request['password']);
+
+            if (isset($request['password'])) {
+                $user->password = Hash::make($request['password']);
+            }
 
             if (!Auth::user()->cannot('change_level')) {
                 $user->level_id = $request['level_id'];

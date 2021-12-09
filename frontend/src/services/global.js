@@ -2,7 +2,7 @@ import moment from "moment";
 
 //Funcão para extrair a hora de um datetime
 function time(date) {
-    return (moment(date).format('hh:mm:ss'));
+    return (moment(date).format('hh:mm:ss  a'));
 }
 
 //Funcão para formatar para a data padrao pt-br
