@@ -31,6 +31,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create_user', 'App\Policies\UserPolicy@create');
         Gate::define('update_user', 'App\Policies\UserPolicy@update');
         Gate::define('delete_user', 'App\Policies\UserPolicy@delete');
+        Gate::define('change_level', 'App\Policies\UserPolicy@changeLevel');
 
         #AccessLog Policies
         Gate::define('view_any_log', 'App\Policies\AccessLogPolicy@viewAny');

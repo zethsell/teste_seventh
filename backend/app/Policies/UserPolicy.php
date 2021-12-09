@@ -46,4 +46,11 @@ class UserPolicy
             ? Response::deny()
             : Response::allow();
     }
+
+    public function changeLevel(User $user): Response
+    {
+        return $user->isAdmin()
+            ? Response::allow()
+            : Response::deny();
+    }
 }
