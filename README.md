@@ -19,6 +19,6 @@
 
   - npm install
   
-- Para subir o servidor com a porta 8001 que foi previamente configurada no frontend execute o seguinte comando:
+- Para subir o servidor com a porta 8002 eu criei um arquivo de configuração entao basta executar:
   
   - npm run serve
