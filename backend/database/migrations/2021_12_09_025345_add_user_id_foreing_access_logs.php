@@ -14,7 +14,7 @@ class AddUserIdForeingAccessLogs extends Migration
     public function up()
     {
         Schema::table('access_logs', function (Blueprint $table) {
-            $table->foreignId('user_id')->index()->after('id');
+            $table->foreignId('user_id')->index()->after('id')->default('');
 
             $table->foreign('user_id')->references('id')->on('users');
         });
