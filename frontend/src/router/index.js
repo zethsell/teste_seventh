@@ -1,25 +1,71 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import {createRouter, createWebHistory} from 'vue-router'
+import Login from '../views/Public/Login.vue'
+import Registration from '../views/Public/Registration.vue'
+import Home from '../views/Private/Home.vue'
+import AccessLog from '../views/Private/AccessLog.vue'
+import Userindex from '../views/Private/Users/Index.vue'
+import UserCreate from '../views/Private/Users/Create.vue'
+import UserEdit from '../views/Private/Users/Edit.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    /*
+    * Public Pages
+     */
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
+    },
+    {
+        path: '/registration',
+        name: 'Registration',
+        component: Registration
+    },
+    /**
+     * Protected Pages
+     */
+    {
+        path: '/',
+        name: 'Home',
+        component: Home
+    },
+    {
+        path: '/access_logs',
+        name: 'AccessLog',
+        component: AccessLog
+    },
+    {
+        path: '/users',
+        name: 'Userindex',
+        component: Userindex
+    },
+    {
+        path: '/user/new',
+        name: 'UserCreate',
+        component: UserCreate
+    },
+    {
+        path: '/user/edit',
+        name: 'UserEdit',
+        component: UserEdit
+    },
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+    history: createWebHistory(process.env.BASE_URL),
+    routes
 })
+
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/login', '/registration'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = localStorage.getItem('user');
+
+    if (authRequired && !loggedIn) {
+        next({name: 'Login'});
+    } else {
+        next();
+    }
+});
 
 export default router
