@@ -1,0 +1,16 @@
+Backend:
+	
+	Para validar os campos do login, novo registro, e CRUD usuarios utilizei as classes de request (php artisan make:request)
+	Para validar as permissoes de usuario Adm Utilizei Policies e cries os Alias no AuthServiceProvider
+	Para as rotas que necessitam de autenticacao utilizei o Laravel/Sanctum
+	
+
+Frontend:
+	
+	Formatacao de data e hora com Moment.JS
+	navegacao com VueRouter
+	Instalei o pacote do TailwindCSS
+	Intalei a biblioteca do FontAwesome
+	Criei um arquivo auth_header.js para incluir o token em todas as requisicoes
+	coloquei tratamento de rotas autenticas / rotas que somente adm pode visualizar
+	
