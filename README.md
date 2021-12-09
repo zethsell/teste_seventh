@@ -38,3 +38,7 @@
 - Para subir o servidor com a porta 8002 eu criei um arquivo de configuração entao basta executar:
   
   - npm run serve
+
+- Usuarios de teste:
+  - admin@seventh.com  123adm456
+  - client@seventh.com 123cli456   
