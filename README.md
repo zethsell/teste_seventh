@@ -31,7 +31,7 @@
   - VueCli -4 
 
 - Abrir o diretório Frontend que se encontra no diretório raiz
-- Abrir o terminal dentro do diretorio Backend encontrado no diretório raiz e executar o seguinte comando:
+- Abrir o terminal dentro do diretorio Frontend encontrado no diretório raiz e executar o seguinte comando:
 
   - npm install
   
