@@ -38,7 +38,7 @@ class AddLevelIdUserTableCreateLevelTable extends Migration
         # sqlite nao suporta excluir foreing key, entao é necessario recriar a tabela
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->default(0)
+            $table->string('name')->default(0);
             $table->string('email')->unique()->default('');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
